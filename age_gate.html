@@ -9,10 +9,11 @@
 
   <style>
     :root{
-      --bg:#121212;
-      --card:#161616f2;
+      --card:#0d0d0de6;
       --text:#ededed;
       --muted:#b7b7b7;
+      --stroke:#232323;
+      --hover:#363636;
       --red:#8b0000;
       --red-2:#b31217;
     }
@@ -20,58 +21,51 @@
     body{
       margin:0; padding:0; color:var(--text);
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background:#0b0b0b url('download.png') no-repeat center top fixed;
+
+      /* match cherries background */
+      background:#0b0b0b url('cherries.jpg') no-repeat center top fixed;
       background-size: cover;
     }
     body::before{ content:""; position:fixed; inset:0; background:rgba(0,0,0,.55); pointer-events:none; }
 
-    .wrap{
-      min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px;
-    }
+    .wrap{ min-height:100%; display:flex; align-items:center; justify-content:center; padding:28px 16px; }
     .card{
-      width:min(680px, 96vw);
+      width:min(560px, 96vw);
       background:var(--card);
-      border:1px solid #2a2a2a; border-radius:14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-      padding:26px 22px;
+      border:1px solid var(--stroke); border-radius:16px;
+      box-shadow:0 14px 36px rgba(0,0,0,.45);
+      padding:22px 18px;
     }
+
     h2{ margin:0 0 6px 0; font-size:18px; letter-spacing:.12em; text-transform:uppercase; color:#d7d7d7 }
     p{ margin:6px 0 14px 0; color:var(--muted); font-size:13px }
 
     .btn{
-      display:inline-block; padding:12px 16px; border-radius:10px;
-      background:#1a1a1a; border:1px solid #2b2b2b; color:#fff; text-decoration:none;
+      display:inline-block; padding:12px 16px; border-radius:12px;
+      background:#121212; border:1px solid var(--stroke); color:#fff; text-decoration:none;
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       cursor:pointer; margin-right:8px;
     }
-    .btn:hover{ transform:translateY(-1px); border-color:#3b3b3b; box-shadow:0 10px 24px rgba(0,0,0,.35); }
+    .btn:hover{ transform:translateY(-1px); border-color:var(--hover); box-shadow:0 10px 24px rgba(0,0,0,.35); }
 
-    .links{
-      display:grid; grid-template-columns: repeat(6, 1fr); gap:10px;
-      margin-top:14px;
-    }
-    @media (max-width:560px){ .links{ grid-template-columns: repeat(4, 1fr);} }
-    .links a{
-      position:relative;
+    .links-col{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+    .links-col a{
+      position:relative; height:56px; border-radius:12px;
       display:flex; align-items:center; justify-content:center;
-      height:58px; border-radius:10px; background:#1a1a1a; border:1px solid #2b2b2b; color:#fff;
-      text-decoration:none; font-size:24px;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      background:#151515e6; border:1px solid var(--stroke); color:#fff; text-decoration:none;
+      font-size:24px; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
-    .links a:hover{ transform:translateY(-2px); border-color:#3b3b3b; box-shadow:0 10px 22px rgba(0,0,0,.35); }
+    .links-col a:hover{ transform:translateY(-1px); border-color:var(--hover); box-shadow:0 10px 22px rgba(0,0,0,.35); }
 
-    /* Featured (OnlyFans) */
-    .links a.featured{
-      transform:scale(1.12);
-      border-color:var(--red);
-      box-shadow:0 0 18px rgba(139,0,0,.45);
-    }
-    .links a.featured:hover{ transform:scale(1.16); box-shadow:0 0 22px rgba(139,0,0,.6) }
+    /* Featured OnlyFans: double icon size & subtle glow */
+    .links-col a.featured i{ font-size:48px; }   /* doubled */
+    .links-col a.featured{ border-color:var(--red); box-shadow:0 0 18px rgba(139,0,0,.45); }
+    .links-col a.featured:hover{ box-shadow:0 0 22px rgba(139,0,0,.6) }
 
     /* backup dot */
-    .links a.backup::after{
-      content:""; position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:50%;
-      background:var(--red-2); box-shadow:0 0 8px rgba(179,18,23,.55);
+    .links-col a.backup::after{
+      content:""; position:absolute; top:8px; right:10px; width:8px; height:8px; border-radius:50%;
+      background:var(--red-2); box-shadow:0 0 10px rgba(179,18,23,.55);
     }
 
     .hidden{ display:none }
@@ -86,8 +80,8 @@
       <a href="index.html" class="btn">Back</a>
 
       <div id="content" class="hidden">
-        <div class="links">
-          <!-- Put OnlyFans first and “featured” -->
+        <div class="links-col">
+          <!-- OnlyFans FIRST and FEATURED (double icon) -->
           <a class="featured" href="https://onlyfans.com/emberiska" target="_blank" rel="noopener noreferrer" title="OnlyFans">
             <i class="fa-solid fa-star"></i>
           </a>
