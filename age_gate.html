@@ -1,116 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Additional Links</title>
-  <!-- Load Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg:#121212;
+      --card:#161616f2;
+      --text:#ededed;
+      --muted:#b7b7b7;
+      --red:#8b0000;
+      --red-2:#b31217;
     }
-    .container {
-      max-width: 500px;
-      width: 100%;
-      background-color: #1f1f1f;
-      border: 1px solid #333;
-      padding: 24px;
-      border-radius: 8px;
-      text-align: center;
+    html,body{height:100%}
+    body{
+      margin:0; padding:0; color:var(--text);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:#0b0b0b url('download.png') no-repeat center top fixed;
+      background-size: cover;
     }
-    h2 {
-      margin-top: 0;
-      color: #f2f2f2;
+    body::before{ content:""; position:fixed; inset:0; background:rgba(0,0,0,.55); pointer-events:none; }
+
+    .wrap{
+      min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px;
     }
-    p {
-      font-size: 1rem;
-      color: #ccc;
+    .card{
+      width:min(680px, 96vw);
+      background:var(--card);
+      border:1px solid #2a2a2a; border-radius:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+      padding:26px 22px;
     }
-    button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 6px;
-      background-color: #8b0000;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease;
+    h2{ margin:0 0 6px 0; font-size:18px; letter-spacing:.12em; text-transform:uppercase; color:#d7d7d7 }
+    p{ margin:6px 0 14px 0; color:var(--muted); font-size:13px }
+
+    .btn{
+      display:inline-block; padding:12px 16px; border-radius:10px;
+      background:#1a1a1a; border:1px solid #2b2b2b; color:#fff; text-decoration:none;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      cursor:pointer; margin-right:8px;
     }
-    button:hover {
-      background-color: #b30000;
-      transform: translateY(-2px);
+    .btn:hover{ transform:translateY(-1px); border-color:#3b3b3b; box-shadow:0 10px 24px rgba(0,0,0,.35); }
+
+    .links{
+      display:grid; grid-template-columns: repeat(6, 1fr); gap:10px;
+      margin-top:14px;
     }
-    /* List of links shown after confirmation */
-    .links {
-      display: none;
-      margin-top: 20px;
-      text-align: left;
+    @media (max-width:560px){ .links{ grid-template-columns: repeat(4, 1fr);} }
+    .links a{
+      position:relative;
+      display:flex; align-items:center; justify-content:center;
+      height:58px; border-radius:10px; background:#1a1a1a; border:1px solid #2b2b2b; color:#fff;
+      text-decoration:none; font-size:24px;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
-    .link-button {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      background-color: #2a2a2a;
-      color: #e0e0e0;
-      padding: 12px 16px;
-      margin: 6px 0;
-      border-radius: 8px;
-      border: 1px solid #444;
-      transition: background-color 0.2s ease, transform 0.2s ease;
+    .links a:hover{ transform:translateY(-2px); border-color:#3b3b3b; box-shadow:0 10px 22px rgba(0,0,0,.35); }
+
+    /* Featured (OnlyFans) */
+    .links a.featured{
+      transform:scale(1.12);
+      border-color:var(--red);
+      box-shadow:0 0 18px rgba(139,0,0,.45);
     }
-    .link-button i {
-      font-size: 1.3rem;
-      margin-right: 12px;
-      color: #c0392b;
+    .links a.featured:hover{ transform:scale(1.16); box-shadow:0 0 22px rgba(139,0,0,.6) }
+
+    /* backup dot */
+    .links a.backup::after{
+      content:""; position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:50%;
+      background:var(--red-2); box-shadow:0 0 8px rgba(179,18,23,.55);
     }
-    .link-button:hover {
-      background-color: #3a3a3a;
-      transform: translateY(-2px);
-    }
+
+    .hidden{ display:none }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Age Verification</h2>
-    <p id="prompt">This section contains additional links for adults 18 years or older. Please confirm you are over 18 to continue.</p>
-    <button id="confirmBtn" onclick="showLinks()">I Confirm I'm 18 or Older</button>
-    <!-- Hidden links section -->
-    <div class="links" id="linksList">
-      <div class="section-title" style="color:#c0392b; font-size:1.2rem; margin-bottom:12px; border-bottom:1px solid #444; padding-bottom:6px;">More Links</div>
-      <a class="link-button" href="https://x.com/ember_iska?s=21" target="_blank" rel="noopener noreferrer" title="Twitter (Main)">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a class="link-button" href="https://x.com/emberiska_?s=21" target="_blank" rel="noopener noreferrer" title="Twitter (Backup)">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a class="link-button" href="https://www.reddit.com/u/EmberIska/s/0cr5Zhu6wE" target="_blank" rel="noopener noreferrer" title="Reddit">
-        <i class="fab fa-reddit"></i>
-      </a>
-      <a class="link-button" href="https://onlyfans.com/emberiska" target="_blank" rel="noopener noreferrer" title="OnlyFans">
-        <i class="fas fa-star"></i>
-      </a>
-      <a class="link-button" href="https://dejen.com/?r=ember" target="_blank" rel="noopener noreferrer" title="Special Partner">
-        <i class="fas fa-dice"></i>
-      </a>
+  <div class="wrap">
+    <div class="card">
+      <h2>Age Verification</h2>
+      <p id="prompt">This section contains additional links for adults 18+.</p>
+      <button id="yes" class="btn">I am 18+</button>
+      <a href="index.html" class="btn">Back</a>
+
+      <div id="content" class="hidden">
+        <div class="links">
+          <!-- Put OnlyFans first and “featured” -->
+          <a class="featured" href="https://onlyfans.com/emberiska" target="_blank" rel="noopener noreferrer" title="OnlyFans">
+            <i class="fa-solid fa-star"></i>
+          </a>
+
+          <!-- X / Twitter (main) -->
+          <a href="https://x.com/ember_iska?s=21" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
+          <!-- X / Twitter (backup) -->
+          <a class="backup" href="https://x.com/emberiska_?s=21" target="_blank" rel="noopener noreferrer" title="X (backup)">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
+          <!-- Reddit -->
+          <a href="https://www.reddit.com/u/EmberIska/s/0cr5Zhu6wE" target="_blank" rel="noopener noreferrer" title="Reddit">
+            <i class="fa-brands fa-reddit-alien"></i>
+          </a>
+
+          <!-- Dejen (gambling partner) -->
+          <a href="https://dejen.com/?r=ember" target="_blank" rel="noopener noreferrer" title="Special Partner">
+            <i class="fa-solid fa-link"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
+
   <script>
-    function showLinks() {
-      // Hide the prompt and button
-      document.getElementById('prompt').style.display = 'none';
-      document.getElementById('confirmBtn').style.display = 'none';
-      // Show the list of exclusive links
-      document.getElementById('linksList').style.display = 'block';
-    }
+    document.getElementById('yes').addEventListener('click', function(){
+      document.getElementById('prompt').classList.add('hidden');
+      document.getElementById('yes').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+    });
   </script>
 </body>
 </html>
