@@ -5,101 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ember Iska Links</title>
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
     :root{
       --bg:#0b0b0b;
-      --card:#0d0d0de6;   /* black box */
+      --card:#0d0d0de6;
       --text:#e8e8e8;
       --muted:#a7a7a7;
-      --red:#8b0000;
-      --red-2:#b31217;
       --stroke:#232323;
       --hover:#363636;
+      --red-2:#b31217;
     }
-
     html,body{height:100%}
     body{
       margin:0; padding:0; color:var(--text);
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:#0b0b0b url('cherries.jpg') no-repeat center top fixed;
+      background-size:cover;
+    }
+    body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);pointer-events:none;}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:32px 16px;position:relative;z-index:1}
+    .card{width:min(560px,96vw);background:var(--card);border:1px solid var(--stroke);border-radius:16px;box-shadow:0 14px 36px rgba(0,0,0,.45);backdrop-filter:blur(2px);padding:22px 18px}
+    .header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+    .avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(80% 80% at 50% 30%,#202020 0%,#0e0e0e 100%);border:1px solid #2b2b2b;font-size:20px}
+    .title{font-size:22px;font-weight:700;letter-spacing:.4px}
+    .subtitle{font-size:12px;color:var(--muted)}
+    .section{margin-top:18px}
+    .section-title{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#cfcfcf;margin:0 0 10px 2px}
 
-      /* NEW cherries background */
-      background: #0b0b0b url('cherries.jpg') no-repeat center top fixed;
-      background-size: cover;     /* try 'contain' if you want zero crop */
-    }
-    /* Subtle dark overlay for readability */
-    body::before{
-      content:""; position:fixed; inset:0;
-      background: rgba(0,0,0,.45);
-      pointer-events:none; z-index:0;
-    }
+    /* vertical logo-only buttons */
+    .links-col{display:flex;flex-direction:column;gap:10px}
+    .link{position:relative;display:flex;align-items:center;justify-content:center;height:56px;border-radius:12px;background:#151515e6;border:1px solid var(--stroke);color:#fff;text-decoration:none;font-size:24px;transition:transform .15s, box-shadow .15s, border-color .15s}
+    .link:hover{transform:translateY(-1px);border-color:var(--hover);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+    .link.backup::after{content:"";position:absolute;top:8px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--red-2);box-shadow:0 0 10px rgba(179,18,23,.55)}
 
-    .wrap{
-      position:relative; z-index:1;
-      min-height:100%;
-      display:flex; align-items:center; justify-content:center;
-      padding:32px 16px;
-    }
-    .card{
-      width:min(560px, 96vw);
-      background:var(--card);
-      border:1px solid var(--stroke);
-      border-radius:16px;
-      box-shadow: 0 14px 36px rgba(0,0,0,.45);
-      backdrop-filter: blur(2px);
-      padding:22px 18px;
-    }
-
-    /* Header */
-    .header{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
-    .avatar{
-      width:44px; height:44px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      background: radial-gradient(80% 80% at 50% 30%, #202020 0%, #0e0e0e 100%);
-      border:1px solid #2b2b2b; font-size:20px;
-    }
-    .title{ font-size:22px; font-weight:700; letter-spacing:.4px }
-    .subtitle{ font-size:12px; color:var(--muted) }
-
-    .section{ margin-top:18px }
-    .section-title{
-      font-size:12px; letter-spacing:.15em; text-transform:uppercase;
-      color:#cfcfcf; margin:0 0 10px 2px;
-    }
-
-    /* Vertical links (logo-only buttons) */
-    .links-col{
-      display:flex; flex-direction:column; gap:10px;
-    }
-    .link{
-      position:relative;
-      display:flex; align-items:center; justify-content:center;
-      height:56px; border-radius:12px;
-      background:#151515e6;
-      border:1px solid var(--stroke);
-      color:#fff; text-decoration:none;
-      font-size:24px; /* icon size */
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
-    }
-    .link:hover{ transform: translateY(-1px); border-color: var(--hover); box-shadow:0 10px 24px rgba(0,0,0,.35) }
-
-    /* tiny “backup dot” marker so you can tell backups w/o text */
-    .link.backup::after{
-      content:""; position:absolute; top:8px; right:10px;
-      width:8px; height:8px; border-radius:50%;
-      background:var(--red-2); box-shadow:0 0 10px rgba(179,18,23,.55);
-    }
-
-    /* Neutral age-gate button */
-    .age-gate{
-      display:block; text-align:center; margin-top:14px;
-      background:#121212; border:1px solid var(--stroke); color:#fff;
-      padding:14px 16px; border-radius:12px; text-decoration:none;
-      letter-spacing:.05em; transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
-    }
-    .age-gate:hover{ transform:translateY(-1px); border-color:var(--hover); box-shadow:0 10px 24px rgba(0,0,0,.35); }
+    /* neutral age-gate button */
+    .age-gate{display:block;text-align:center;margin-top:14px;background:#121212;border:1px solid var(--stroke);color:#fff;padding:14px 16px;border-radius:12px;text-decoration:none;letter-spacing:.05em;transition:box-shadow .15s, transform .15s, border-color .15s}
+    .age-gate:hover{transform:translateY(-1px);border-color:var(--hover);box-shadow:0 10px 24px rgba(0,0,0,.35)}
   </style>
 </head>
 <body>
@@ -114,7 +57,7 @@
         </div>
       </div>
 
-      <!-- MAIN CHANNELS (vertical) -->
+      <!-- MAIN CHANNELS -->
       <div class="section">
         <div class="section-title">Main Channels</div>
         <div class="links-col">
@@ -136,13 +79,10 @@
           <a class="link" href="https://youtube.com/@emberiska?si=1bXjk8wDs7EKMJ83" target="_blank" rel="noopener noreferrer" title="YouTube">
             <i class="fa-brands fa-youtube"></i>
           </a>
-          <a class="link" href="https://x.com/ember_iska?s=21" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
         </div>
       </div>
 
-      <!-- BACKUPS (vertical) -->
+      <!-- BACKUPS -->
       <div class="section">
         <div class="section-title">Alternate / Backup</div>
         <div class="links-col">
@@ -152,21 +92,14 @@
           <a class="link backup" href="https://www.instagram.com/emberiska.spell?igsh=dWkxYTZlM3dtbWU0&utm_source=qr" target="_blank" rel="noopener noreferrer" title="Instagram (backup)">
             <i class="fa-brands fa-instagram"></i>
           </a>
-          <a class="link backup" href="https://www.tiktok.com/@emberiska?_t=ZT-909Li3bDpXx&_r=1" target="_blank" rel="noopener noreferrer" title="TikTok (alt)">
-            <i class="fa-brands fa-tiktok"></i>
-          </a>
+          <!-- removed the duplicate main TikTok; keeping only true alts -->
           <a class="link backup" href="https://www.tiktok.com/@emberiska.spark?_t=ZT-909Ll8hVJzj&_r=1" target="_blank" rel="noopener noreferrer" title="TikTok (alt)">
             <i class="fa-brands fa-tiktok"></i>
           </a>
           <a class="link backup" href="https://www.tiktok.com/@ember.void.vault?_t=ZT-909VyVECex4&_r=1" target="_blank" rel="noopener noreferrer" title="TikTok (alt)">
             <i class="fa-brands fa-tiktok"></i>
           </a>
-          <a class="link backup" href="https://x.com/emberiska_?s=21" target="_blank" rel="noopener noreferrer" title="X (backup)">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
-          <a class="link backup" href="https://www.reddit.com/u/EmberIska/s/0cr5Zhu6wE" target="_blank" rel="noopener noreferrer" title="Reddit">
-            <i class="fa-brands fa-reddit-alien"></i>
-          </a>
+          <!-- X and Reddit removed from the landing page -->
         </div>
       </div>
 
